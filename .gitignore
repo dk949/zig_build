@@ -1,6 +1,5 @@
-zstd
-llvm
-zig
-zstd-source
 llvm-source
+llvm
 zig-source
+zig
+progress
