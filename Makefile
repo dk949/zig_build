@@ -1,5 +1,5 @@
-ZIG_PREFIX := $(PWD)/zig
-LLVM_PREFIX := $(PWD)/llvm
+ZIG_PREFIX  ?= $(PWD)/zig
+LLVM_PREFIX ?= $(PWD)/llvm
 
 all: progress/zig
 

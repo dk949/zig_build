@@ -1,8 +1,7 @@
-ZIG_BUILD_MODE := Debug
-
-ZIG_PREFIX := $(PWD)/zig
-LLVM_PREFIX := $(PWD)/llvm
-ZSTD_PREFIX := $(PWD)/zstd
+ZIG_BUILD_MODE ?= Debug
+ZIG_PREFIX     ?= $(PWD)/zig
+LLVM_PREFIX    ?= $(PWD)/llvm
+ZSTD_PREFIX    ?= $(PWD)/zstd
 
 all: progress/zig
 
