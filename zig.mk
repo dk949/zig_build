@@ -17,6 +17,7 @@ progress/zig-cmake-config: progress/zig-clone
 	  -DZIG_USE_LLVM_CONFIG=On \
 	  -DZIG_FIX_SYSTEM_LIBS=On \
 	  -DZIG_USE_CCACHE=On \
+	  -G $(GENERATOR) \
 	  -DCMAKE_BUILD_TYPE=$(ZIG_BUILD_MODE)
 	touch $@
 

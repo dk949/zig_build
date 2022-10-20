@@ -19,7 +19,7 @@ progress/llvm-cmake-config: progress/llvm-clone
 	  -DLLVM_ENABLE_LIBEDIT=OFF \
 	  -DLLVM_ENABLE_ASSERTIONS=ON \
 	  -DLLVM_CCACHE_BUILD=ON \
-	  -G Ninja \
+	  -G $(GENERATOR) \
 	  -DLLVM_PARALLEL_LINK_JOBS=1
 	touch $@
 

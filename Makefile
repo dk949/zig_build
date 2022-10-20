@@ -1,15 +1,18 @@
 ZIG_PREFIX  ?= $(PWD)/zig
 LLVM_PREFIX ?= $(PWD)/llvm
+GENERATOR   ?= Ninja
 
 all: progress/zig
 
 progress/zig: progress/llvm
 	LLVM_PREFIX=$(LLVM_PREFIX) \
 	ZIG_PREFIX=$(ZIG_PREFIX) \
+	GENERATOR=$(GENERATOR) \
 	$(MAKE) -f zig.mk
 
 progress/llvm: progress
 	LLVM_PREFIX=$(LLVM_PREFIX) \
+	GENERATOR=$(GENERATOR) \
 	$(MAKE) -f llvm.mk
 
 progress:
