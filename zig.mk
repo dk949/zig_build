@@ -6,14 +6,11 @@ ZSTD_PREFIX    ?= $(PWD)/zstd
 all: progress/zig
 
 progress/zig-clone:
-	git clone --recursive https://github.com/ziglang/zig.git zig-source
+	git clone --recursive https://github.com/dk949/zig.git zig-source
 	touch $@
 
-progress/zig-patch: progress/zig-clone
-	git -C zig-source apply ../zsdt_fix.patch
-	touch $@
 
-progress/zig-cmake-config: progress/zig-patch
+progress/zig-cmake-config: progress/zig-clone
 	cmake -B zig-source/build-$(ZIG_BUILD_MODE) -S zig-source \
 	  -DCMAKE_INSTALL_PREFIX=$(ZIG_PREFIX) \
 	  -DCMAKE_PREFIX_PATH="$(LLVM_PREFIX)" \
