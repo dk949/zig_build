@@ -1,23 +1,25 @@
 ZIG_PREFIX  ?= $(PWD)/zig
 LLVM_PREFIX ?= $(PWD)/llvm
 GENERATOR   ?= Ninja
+BUILD_MODE  ?= Debug
 
 all: progress/zig
 
 progress/zig: progress/llvm
-	LLVM_PREFIX=$(LLVM_PREFIX) \
-	ZIG_PREFIX=$(ZIG_PREFIX) \
-	GENERATOR=$(GENERATOR) \
+	LLVM_PREFIX=$(LLVM_PREFIX)   \
+	ZIG_PREFIX=$(ZIG_PREFIX)     \
+	ZIG_BUILD_MODE=$(BUILD_MODE) \
+	GENERATOR=$(GENERATOR)       \
 	$(MAKE) -f zig.mk
 
 progress/llvm: progress
-	LLVM_PREFIX=$(LLVM_PREFIX) \
-	GENERATOR=$(GENERATOR) \
+	LLVM_PREFIX=$(LLVM_PREFIX)    \
+	LLVM_BUILD_MODE=$(BUILD_MODE) \
+	GENERATOR=$(GENERATOR)        \
 	$(MAKE) -f llvm.mk
 
 progress:
 	mkdir -p progress
-
 
 clean-zig:
 	$(MAKE) -f zig.mk clean
@@ -31,7 +33,6 @@ clean-cmake-zig:
 clean-deep-zig:
 	$(MAKE) -f zig.mk clean-deep
 
-
 clean-llvm:
 	$(MAKE) -f llvm.mk clean
 
@@ -44,7 +45,6 @@ clean-cmake-llvm:
 clean-deep-llvm:
 	$(MAKE) -f llvm.mk clean-deep
 
-
 clean-all: clean-zig clean-llvm
 
 clean-comp-all: clean-comp-zig clean-comp-llvm
@@ -52,7 +52,6 @@ clean-comp-all: clean-comp-zig clean-comp-llvm
 clean-cmake-all: clean-cmake-zig clean-cmake-llvm
 
 clean-deep-all: clean-deep-zig clean-deep-llvm
-
 
 clean: clean-zig
 
