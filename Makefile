@@ -1,21 +1,22 @@
-ZIG_PREFIX  ?= $(PWD)/zig
-LLVM_PREFIX ?= $(PWD)/llvm
-GENERATOR   ?= Ninja
-BUILD_MODE  ?= Debug
+ZIG_PREFIX      ?= $(PWD)/zig
+LLVM_PREFIX     ?= $(PWD)/llvm
+GENERATOR       ?= Ninja
+ZIG_BUILD_MODE  ?= Debug
+LLVM_BUILD_MODE ?= Debug
 
 all: progress/zig
 
 progress/zig: progress/llvm
-	LLVM_PREFIX=$(LLVM_PREFIX)   \
-	ZIG_PREFIX=$(ZIG_PREFIX)     \
-	ZIG_BUILD_MODE=$(BUILD_MODE) \
-	GENERATOR=$(GENERATOR)       \
+	LLVM_PREFIX=$(LLVM_PREFIX)       \
+	ZIG_PREFIX=$(ZIG_PREFIX)         \
+	ZIG_BUILD_MODE=$(ZIG_BUILD_MODE) \
+	GENERATOR=$(GENERATOR)           \
 	$(MAKE) -f zig.mk
 
 progress/llvm: progress
-	LLVM_PREFIX=$(LLVM_PREFIX)    \
-	LLVM_BUILD_MODE=$(BUILD_MODE) \
-	GENERATOR=$(GENERATOR)        \
+	LLVM_PREFIX=$(LLVM_PREFIX)        \
+	LLVM_BUILD_MODE=$(LLVM_BUILD_MODE) \
+	GENERATOR=$(GENERATOR)            \
 	$(MAKE) -f llvm.mk
 
 progress:
