@@ -1,3 +1,11 @@
+include utils.mk
+
+$(call undef_info,ZIG_PREFIX,"Zig install location",$(PWD)/zig)
+$(call undef_info,LLVM_PREFIX,"LLVM install location",$(PWD)/llvm)
+$(call undef_info,GENERATOR,"CMake generator to use",Ninja)
+$(call undef_info,ZIG_BUILD_MODE,"Which mode to build Zig in [Debug|Release]",Debug)
+$(call undef_info,LLVM_BUILD_MODE,"Which mode to build LLVM in [Debug|Release]",Debug)
+
 ZIG_PREFIX      ?= $(PWD)/zig
 LLVM_PREFIX     ?= $(PWD)/llvm
 GENERATOR       ?= Ninja

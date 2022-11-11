@@ -1,4 +1,11 @@
+include utils.mk
 ZIG_BUILD_MODE ?= Debug
+
+
+$(call undef_err, GENERATOR, "Which generator should be used with cmake")
+$(call undef_err, LLVM_PREFIX, "Where is LLVM installed to")
+$(call undef_err, ZIG_PREFIX,  "Where to install compiled zig")
+$(call undef_err, ZIG_BUILD_MODE, "Which mode to build zig in [Debug|Release]")
 
 all: progress/zig
 
@@ -9,13 +16,13 @@ progress/zig-clone:
 
 progress/zig-cmake-config: progress/zig-clone
 	cmake -B zig-source/build-$(ZIG_BUILD_MODE) -S zig-source \
-	  -DCMAKE_INSTALL_PREFIX=$(ZIG_PREFIX) \
-	  -DCMAKE_PREFIX_PATH="$(LLVM_PREFIX)" \
-	  -DZIG_USE_LLVM_CONFIG=On \
-	  -DZIG_FIX_SYSTEM_LIBS=On \
-	  -DZIG_USE_CCACHE=On \
-	  -G $(GENERATOR) \
-	  -DCMAKE_BUILD_TYPE=$(ZIG_BUILD_MODE)
+		-DCMAKE_INSTALL_PREFIX=$(ZIG_PREFIX)                  \
+		-DCMAKE_PREFIX_PATH="$(LLVM_PREFIX)"                  \
+		-DZIG_USE_LLVM_CONFIG=On                              \
+		-DZIG_FIX_SYSTEM_LIBS=On                              \
+		-DZIG_USE_CCACHE=On                                   \
+		-G $(GENERATOR)                                       \
+		-DCMAKE_BUILD_TYPE=$(ZIG_BUILD_MODE)
 	touch $@
 
 progress/zig-build: progress/zig-cmake-config

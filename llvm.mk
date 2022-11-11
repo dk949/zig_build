@@ -1,4 +1,9 @@
+include utils.mk
 LLVM_BUILD_MODE ?= Release
+
+$(call undef_err, GENERATOR, "Which generator should be used with cmake")
+$(call undef_err, LLVM_BUILD_MODE, "Which mode to build llvm in [Debug|Release]")
+$(call undef_err, LLVM_PREFIX, "Where to install compiled LLVM")
 
 all: progress/llvm
 
