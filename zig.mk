@@ -2,11 +2,11 @@ include utils.mk
 ZIG_BUILD_MODE ?= Debug
 
 
-$(call undef_err, GENERATOR, "Which generator should be used with cmake")
-$(call undef_err, LLVM_PREFIX, "Where is LLVM installed to")
-$(call undef_err, ZIG_PREFIX,  "Where to install compiled zig")
-$(call undef_err, ZIG_BUILD_MODE, "Which mode to build zig in [Debug|Release]")
-$(call undef_err, USE_CCACHE, "Use ccache to cache build files")
+$(call undef_err,GENERATOR,"Which generator should be used with cmake")
+$(call undef_err,LLVM_PREFIX,"Where is LLVM installed to")
+$(call undef_err,ZIG_PREFIX,"Where to install compiled zig")
+$(call undef_err,ZIG_BUILD_MODE,"Which mode to build zig in [Debug|Release]")
+$(call undef_err,USE_CCACHE,"Use ccache to cache build files")
 
 all: progress/zig
 
