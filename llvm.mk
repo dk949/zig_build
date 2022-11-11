@@ -4,6 +4,7 @@ LLVM_BUILD_MODE ?= Release
 $(call undef_err, GENERATOR, "Which generator should be used with cmake")
 $(call undef_err, LLVM_BUILD_MODE, "Which mode to build llvm in [Debug|Release]")
 $(call undef_err, LLVM_PREFIX, "Where to install compiled LLVM")
+$(call undef_err, USE_CCACHE, "Use ccache to cache build files")
 
 all: progress/llvm
 
@@ -25,7 +26,7 @@ progress/llvm-cmake-config: progress/llvm-checkout
 		-DLLVM_ENABLE_TERMINFO=OFF                                    \
 		-DLLVM_ENABLE_LIBEDIT=OFF                                     \
 		-DLLVM_ENABLE_ASSERTIONS=ON                                   \
-		-DLLVM_CCACHE_BUILD=ON                                        \
+		-DLLVM_CCACHE_BUILD=$(USE_CCACHE)                             \
 		-G $(GENERATOR)                                               \
 		-DLLVM_PARALLEL_LINK_JOBS=1
 	touch $@

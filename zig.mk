@@ -6,6 +6,7 @@ $(call undef_err, GENERATOR, "Which generator should be used with cmake")
 $(call undef_err, LLVM_PREFIX, "Where is LLVM installed to")
 $(call undef_err, ZIG_PREFIX,  "Where to install compiled zig")
 $(call undef_err, ZIG_BUILD_MODE, "Which mode to build zig in [Debug|Release]")
+$(call undef_err, USE_CCACHE, "Use ccache to cache build files")
 
 all: progress/zig
 
@@ -20,7 +21,7 @@ progress/zig-cmake-config: progress/zig-clone
 		-DCMAKE_PREFIX_PATH="$(LLVM_PREFIX)"                  \
 		-DZIG_USE_LLVM_CONFIG=On                              \
 		-DZIG_FIX_SYSTEM_LIBS=On                              \
-		-DZIG_USE_CCACHE=On                                   \
+		-DZIG_USE_CCACHE=$(USE_CCACHE)                        \
 		-G $(GENERATOR)                                       \
 		-DCMAKE_BUILD_TYPE=$(ZIG_BUILD_MODE)
 	touch $@

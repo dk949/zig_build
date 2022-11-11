@@ -5,12 +5,14 @@ $(call undef_info,LLVM_PREFIX,"LLVM install location",$(PWD)/llvm)
 $(call undef_info,GENERATOR,"CMake generator to use",Ninja)
 $(call undef_info,ZIG_BUILD_MODE,"Which mode to build Zig in [Debug|Release]",Debug)
 $(call undef_info,LLVM_BUILD_MODE,"Which mode to build LLVM in [Debug|Release]",Debug)
+$(call undef_info,USE_CCACHE,"Use ccache to cache build files [ON|OFF]",ON)
 
 ZIG_PREFIX      ?= $(PWD)/zig
 LLVM_PREFIX     ?= $(PWD)/llvm
 GENERATOR       ?= Ninja
 ZIG_BUILD_MODE  ?= Debug
 LLVM_BUILD_MODE ?= Debug
+USE_CCACHE      ?= ON
 
 all: progress/zig
 
@@ -19,12 +21,14 @@ progress/zig: progress/llvm
 	ZIG_PREFIX=$(ZIG_PREFIX)         \
 	ZIG_BUILD_MODE=$(ZIG_BUILD_MODE) \
 	GENERATOR=$(GENERATOR)           \
+	USE_CCACHE=$(USE_CCACHE)         \
 	$(MAKE) -f zig.mk
 
 progress/llvm: progress
-	LLVM_PREFIX=$(LLVM_PREFIX)        \
+	LLVM_PREFIX=$(LLVM_PREFIX)         \
 	LLVM_BUILD_MODE=$(LLVM_BUILD_MODE) \
-	GENERATOR=$(GENERATOR)            \
+	GENERATOR=$(GENERATOR)             \
+	USE_CCACHE=$(USE_CCACHE)           \
 	$(MAKE) -f llvm.mk
 
 progress:
