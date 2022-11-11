@@ -16,47 +16,52 @@ USE_CCACHE      ?= ON
 
 all: progress/zig
 
+ZIG_MK_FLAGS = LLVM_PREFIX=$(LLVM_PREFIX)       \
+			   ZIG_PREFIX=$(ZIG_PREFIX)         \
+			   ZIG_BUILD_MODE=$(ZIG_BUILD_MODE) \
+			   GENERATOR=$(GENERATOR)           \
+			   USE_CCACHE=$(USE_CCACHE)
+
+LLVM_MK_FLAGS = LLVM_PREFIX=$(LLVM_PREFIX)         \
+				LLVM_BUILD_MODE=$(LLVM_BUILD_MODE) \
+				GENERATOR=$(GENERATOR)             \
+				USE_CCACHE=$(USE_CCACHE)
+
+MAKE_ZIG  = $(MAKE) $(ZIG_MK_FLAGS)  -f zig.mk
+MAKE_LLVM = $(MAKE) $(LLVM_MK_FLAGS) -f llvm.mk
+
 progress/zig: progress/llvm
-	LLVM_PREFIX=$(LLVM_PREFIX)       \
-	ZIG_PREFIX=$(ZIG_PREFIX)         \
-	ZIG_BUILD_MODE=$(ZIG_BUILD_MODE) \
-	GENERATOR=$(GENERATOR)           \
-	USE_CCACHE=$(USE_CCACHE)         \
-	$(MAKE) -f zig.mk
+	$(MAKE_ZIG)
 
 progress/llvm: progress
-	LLVM_PREFIX=$(LLVM_PREFIX)         \
-	LLVM_BUILD_MODE=$(LLVM_BUILD_MODE) \
-	GENERATOR=$(GENERATOR)             \
-	USE_CCACHE=$(USE_CCACHE)           \
-	$(MAKE) -f llvm.mk
+	$(MAKE_LLVM)
 
 progress:
 	mkdir -p progress
 
 clean-zig:
-	$(MAKE) -f zig.mk clean
+	$(MAKE_ZIG) clean
 
 clean-comp-zig:
-	$(MAKE) -f zig.mk clean-comp
+	$(MAKE_ZIG) clean-comp
 
 clean-cmake-zig:
-	$(MAKE) -f zig.mk clean-cmake
+	$(MAKE_ZIG) clean-cmake
 
 clean-deep-zig:
-	$(MAKE) -f zig.mk clean-deep
+	$(MAKE_ZIG) clean-deep
 
 clean-llvm:
-	$(MAKE) -f llvm.mk clean
+	$(MAKE_LLVM) clean
 
 clean-comp-llvm:
-	$(MAKE) -f llvm.mk clean-comp
+	$(MAKE_LLVM) clean-comp
 
 clean-cmake-llvm:
-	$(MAKE) -f llvm.mk clean-cmake
+	$(MAKE_LLVM) clean-cmake
 
 clean-deep-llvm:
-	$(MAKE) -f llvm.mk clean-deep
+	$(MAKE_LLVM) clean-deep
 
 clean-all: clean-zig clean-llvm
 
