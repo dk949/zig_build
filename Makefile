@@ -11,7 +11,7 @@ ZIG_PREFIX      ?= $(PWD)/zig
 LLVM_PREFIX     ?= $(PWD)/llvm
 GENERATOR       ?= Ninja
 ZIG_BUILD_MODE  ?= Debug
-LLVM_BUILD_MODE ?= Debug
+LLVM_BUILD_MODE ?= Release
 USE_CCACHE      ?= ON
 
 all: progress/zig
