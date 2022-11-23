@@ -11,7 +11,8 @@ $(call undef_err,USE_CCACHE,"Use ccache to cache build files")
 all: progress/zig
 
 progress/zig-clone:
-	git clone --recursive https://github.com/dk949/zig.git zig-source
+	git clone --recursive https://github.com/ziglang/zig.git zig-source
+	git -C zig-source checkout 0.10.x
 	touch $@
 
 
