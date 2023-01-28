@@ -1,17 +1,17 @@
 include utils.mk
 ZIG_BUILD_MODE ?= Debug
 
-
 $(call undef_err,GENERATOR,"Which generator should be used with cmake")
 $(call undef_err,LLVM_PREFIX,"Where is LLVM installed to")
-$(call undef_err,ZIG_PREFIX,"Where to install compiled zig")
-$(call undef_err,ZIG_BUILD_MODE,"Which mode to build zig in [Debug|Release]")
 $(call undef_err,USE_CCACHE,"Use ccache to cache build files")
+$(call undef_err,ZIG_BUILD_MODE,"Which mode to build zig in [Debug|Release]")
+$(call undef_err,ZIG_PREFIX,"Where to install compiled zig")
+$(call undef_err,ZIG_REMOTE,"Git remote to pull zig from")
 
 all: progress/zig
 
 progress/zig-clone:
-	git clone --recursive https://github.com/ziglang/zig.git zig-source
+	git clone --recursive $(ZIG_REMOTE) zig-source
 	git -C zig-source checkout 0.10.x
 	touch $@
 

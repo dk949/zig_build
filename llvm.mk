@@ -2,14 +2,16 @@ include utils.mk
 LLVM_BUILD_MODE ?= Release
 
 $(call undef_err,GENERATOR,"Which generator should be used with cmake")
+$(call undef_err,LLVM_BRANCH,"Git branch for llvm")
 $(call undef_err,LLVM_BUILD_MODE,"Which mode to build llvm in [Debug|Release]")
 $(call undef_err,LLVM_PREFIX,"Where to install compiled LLVM")
+$(call undef_err,LLVM_REMOTE,"Git remote to pull llvm from")
 $(call undef_err,USE_CCACHE,"Use ccache to cache build files")
 
 all: progress/llvm
 
 progress/llvm-clone:
-	git clone --depth 1 --branch release/15.x https://github.com/llvm/llvm-project llvm-source
+	git clone --depth 1 --branch $(LLVM_BRANCH) $(LLVM_REMOTE) llvm-source
 	touch $@
 
 progress/llvm-checkout: progress/llvm-clone
