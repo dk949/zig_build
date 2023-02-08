@@ -79,6 +79,7 @@ clean-comp-all: clean-comp-zig clean-comp-llvm
 clean-cmake-all: clean-cmake-zig clean-cmake-llvm
 
 clean-deep-all: clean-deep-zig clean-deep-llvm
+	rmdir progress
 
 clean: clean-zig
 
